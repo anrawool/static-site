@@ -1,0 +1,20 @@
+{
+  "name": "static-site",
+  "version": "1.0.0",
+  "description": "A simple static site generator with Markdown support",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "npx http-server dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "front-matter": "^4.0.2",
+    "marked": "^12.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
