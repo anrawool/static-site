@@ -3,18 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Site</title>
-    <link rel="stylesheet" href="/src/styles/main.css">
+    <title>Welcome to My Awesome Site</title>
+    <link rel="stylesheet" href="/dist/styles/main.css">
+    <script>
+        // Function to load and inject templates
+        async function loadTemplate(templateName) {
+            try {
+                const response = await fetch(`/dist/templates/${templateName}.html`);
+                const html = await response.text();
+                document.getElementById(templateName).innerHTML = html;
+            } catch (error) {
+                console.error(`Error loading ${templateName}:`, error);
+            }
+        }
+
+        // Load templates when the page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            loadTemplate('header');
+            loadTemplate('footer');
+        });
+    </script>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/blog">Blog</a>
-            <a href="/about">About</a>
-            <a href="/faq">FAQ</a>
-        </nav>
-    </header>
+    <div id="header"></div>
 
     <main>
         <h1>Welcome to My Awesome Site</h1>
@@ -42,8 +53,6 @@
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
-    </footer>
+    <div id="footer"></div>
 </body>
 </html> 

@@ -33,6 +33,7 @@ async function buildSite() {
     try {
         // Create dist directory if it doesn't exist
         await fs.mkdir(path.join(__dirname, 'dist'), { recursive: true });
+        await fs.mkdir(path.join(__dirname, 'dist', 'templates'), { recursive: true });
 
         // Copy CSS files
         const stylesDir = path.join(__dirname, 'src', 'styles');
@@ -46,12 +47,23 @@ async function buildSite() {
             );
         }
 
+        // Copy template files
+        const templatesDir = path.join(__dirname, 'src', 'templates');
+        const distTemplatesDir = path.join(__dirname, 'dist', 'templates');
+        const templateFiles = ['header.html', 'footer.html'];
+        for (const file of templateFiles) {
+            await fs.copyFile(
+                path.join(templatesDir, file),
+                path.join(distTemplatesDir, file)
+            );
+        }
+
         // Process pages
         const pagesDir = path.join(__dirname, 'src', 'pages');
         const files = await fs.readdir(pagesDir);
         
         for (const file of files) {
-            if (!file.endsWith('.md')) continue;
+            if (!file.endsWith('.md') || file === 'index.md') continue;
 
             const filePath = path.join(pagesDir, file);
             const { attributes, html } = await processMarkdown(filePath);
