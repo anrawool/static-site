@@ -23,9 +23,27 @@ async function processMarkdown(filePath) {
 
 async function applyTemplate(template, data) {
     let result = template;
+
+    // Handle includes first
+    const includeRegex = /{%\s*include\s+"([^"]+)"\s*%}/g;
+    const includes = [...result.matchAll(includeRegex)];
+    
+    for (const include of includes) {
+        const [fullMatch, templateName] = include;
+        try {
+            const includedContent = await readTemplate(templateName.replace('.html', ''));
+            result = result.replace(fullMatch, includedContent);
+        } catch (error) {
+            console.error(`Error including template ${templateName}:`, error);
+            result = result.replace(fullMatch, '<!-- Include error -->');
+        }
+    }
+
+    // Then handle variables
     for (const [key, value] of Object.entries(data)) {
         result = result.replace(new RegExp(`{{${key}}}`, 'g'), value);
     }
+    
     return result;
 }
 
@@ -70,7 +88,7 @@ async function buildSite() {
         // Copy template files
         const templatesDir = path.join(__dirname, 'src', 'templates');
         const distTemplatesDir = path.join(__dirname, 'dist', 'templates');
-        const templateFiles = ['header.html', 'footer.html'];
+        const templateFiles = ['header.html', 'footer.html', 'newsletter.html'];
         for (const file of templateFiles) {
             await fs.copyFile(
                 path.join(templatesDir, file),

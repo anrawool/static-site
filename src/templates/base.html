@@ -18,11 +18,48 @@
             }
         }
 
+        // Newsletter form handling
+        function initializeNewsletter() {
+            const form = document.getElementById('newsletter-form');
+            const newsletterContainer = document.getElementById('newsletter-container');
+            
+            if (!form || !newsletterContainer) {
+                console.log('Newsletter elements not found');
+                return;
+            }
+            
+            const submitButton = form.querySelector('input[type="submit"]');
+            console.log('Newsletter form initialized');
+
+            form.addEventListener('submit', function(e) {
+                console.log('Form submitted');
+                
+                // Disable submit button and show loading state
+                submitButton.disabled = true;
+                submitButton.value = 'Subscribing...';
+                
+                // Replace entire newsletter content with thank you message after a short delay
+                setTimeout(function() {
+                    console.log('Replacing content');
+                    newsletterContainer.innerHTML = `
+                        <div class="success-message" style="display: block; text-align: center; padding: 2rem;">
+                            <h2 style="color: #00b894; margin-bottom: 1rem;">Thank You! 🎉</h2>
+                            <p style="color: #636e72; margin-bottom: 1rem;">You've successfully subscribed to our newsletter.</p>
+                            <p style="color: #636e72;">Check your inbox for a confirmation email and get ready to receive the latest membership tips and strategies!</p>
+                        </div>
+                    `;
+                }, 1500);
+            });
+        }
+
         // Load templates when the page loads
         window.addEventListener('DOMContentLoaded', () => {
             loadTemplate('header');
             loadTemplate('footer');
             feather.replace();
+            
+            // Initialize newsletter form
+            initializeNewsletter();
         });
     </script>
 </head>
@@ -33,7 +70,8 @@
         {{content}}
     </main>
 
-    <div id="footer"></div>
+    {% include "newsletter.html" %}
+    {% include "footer.html" %}
 
     <script>
         // Initialize Feather icons after the DOM is loaded
