@@ -5,7 +5,7 @@
   "main": "build.js",
   "scripts": {
     "build": "node build.js",
-    "serve": "npx http-server dist"
+    "serve": "npx http-server dist -c-1 -d false --no-dotfiles"
   },
   "keywords": [],
   "author": "",

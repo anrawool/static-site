@@ -3,25 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
+    <title>{{title}} | MembersHub</title>
     <link rel="stylesheet" href="/styles/main.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        // Function to load and inject templates
+        async function loadTemplate(templateName) {
+            try {
+                const response = await fetch(`/templates/${templateName}.html`);
+                const html = await response.text();
+                document.getElementById(templateName).innerHTML = html;
+            } catch (error) {
+                console.error(`Error loading ${templateName}:`, error);
+            }
+        }
+
+        // Load templates when the page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            loadTemplate('header');
+            loadTemplate('footer');
+            feather.replace();
+        });
+    </script>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/blog">Blog</a>
-            <a href="/about">About</a>
-            <a href="/faq">FAQ</a>
-        </nav>
-    </header>
+    <div id="header"></div>
 
     <main>
         {{content}}
     </main>
 
-    <footer>
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
-    </footer>
+    <div id="footer"></div>
+
+    <script>
+        // Initialize Feather icons after the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+        });
+    </script>
 </body>
 </html> 

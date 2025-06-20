@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Awesome Site</title>
-    <link rel="stylesheet" href="dist/styles/main.css">
+    <title>Build a Central Hub for Your Members | MembersHub</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://unpkg.com/feather-icons"></script>
     <script>
         // Function to load and inject templates
         async function loadTemplate(templateName) {
             try {
-                const response = await fetch(`dist/templates/${templateName}.html`);
+                const response = await fetch(`templates/${templateName}.html`);
                 const html = await response.text();
                 document.getElementById(templateName).innerHTML = html;
             } catch (error) {
@@ -21,6 +22,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             loadTemplate('header');
             loadTemplate('footer');
+            feather.replace();
         });
     </script>
 </head>
@@ -28,31 +30,52 @@
     <div id="header"></div>
 
     <main>
-        <h1>Welcome to My Awesome Site</h1>
+        <h1>Build a Central Hub for Your <span>Members</span></h1>
+        
+        <p class="subtitle">
+            Everything You Need to Connect, Engage, Grow, and Scale Your Community—All in One Place
+        </p>
 
-        <p>This is a simple, modern website built with minimal dependencies. Here you'll find:</p>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i data-feather="users" class="feature-icon"></i>
+                <h3 class="feature-title">Members</h3>
+            </div>
+            <div class="feature-item">
+                <i data-feather="book" class="feature-icon"></i>
+                <h3 class="feature-title">Courses</h3>
+            </div>
+            <div class="feature-item">
+                <i data-feather="message-circle" class="feature-icon"></i>
+                <h3 class="feature-title">Discussions</h3>
+            </div>
+            <div class="feature-item">
+                <i data-feather="calendar" class="feature-icon"></i>
+                <h3 class="feature-title">Events</h3>
+            </div>
+            <div class="feature-item">
+                <i data-feather="bell" class="feature-icon"></i>
+                <h3 class="feature-title">Announcements</h3>
+            </div>
+            <div class="feature-item">
+                <i data-feather="bell" class="feature-icon"></i>
+                <h3 class="feature-title">Notifications</h3>
+            </div>
+        </div>
 
-        <section>
-            <h2>Blog</h2>
-            <p>Check out my latest thoughts and articles in the <a href="dist/blog">blog section</a>.</p>
-        </section>
-
-        <section>
-            <h2>About</h2>
-            <p>Learn more <a href="dist/about.html">about me</a> and what I do.</p>
-        </section>
-
-        <section>
-            <h2>FAQ</h2>
-            <p>Got questions? Check out our <a href="dist/faq">frequently asked questions</a>.</p>
-        </section>
-
-        <section>
-            <h2>Latest Posts</h2>
-            <p>Coming soon...</p>
-        </section>
+        <div class="button-group">
+            <a href="#" class="button button-primary">Buy Now</a>
+            <a href="#" class="button button-secondary">Try For Yourself</a>
+        </div>
     </main>
 
     <div id="footer"></div>
+
+    <script>
+        // Initialize Feather icons after the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+        });
+    </script>
 </body>
 </html> 
