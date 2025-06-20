@@ -113,7 +113,7 @@ async function buildSite() {
         const pagesDir = path.join(__dirname, 'src', 'pages');
         const pageFiles = await fs.readdir(pagesDir);
         for (const file of pageFiles) {
-            if (!file.endsWith('.md') || file === 'blog.md') continue;
+            if (!file.endsWith('.md')) continue;
 
             const filePath = path.join(pagesDir, file);
             const { attributes, html } = await processMarkdown(filePath);
