@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to My Awesome Site</title>
-    <link rel="stylesheet" href="/dist/styles/main.css">
+    <link rel="stylesheet" href="dist/styles/main.css">
     <script>
         // Function to load and inject templates
         async function loadTemplate(templateName) {
             try {
-                const response = await fetch(`/dist/templates/${templateName}.html`);
+                const response = await fetch(`dist/templates/${templateName}.html`);
                 const html = await response.text();
                 document.getElementById(templateName).innerHTML = html;
             } catch (error) {
@@ -34,17 +34,17 @@
 
         <section>
             <h2>Blog</h2>
-            <p>Check out my latest thoughts and articles in the <a href="/blog">blog section</a>.</p>
+            <p>Check out my latest thoughts and articles in the <a href="dist/blog">blog section</a>.</p>
         </section>
 
         <section>
             <h2>About</h2>
-            <p>Learn more <a href="/about">about me</a> and what I do.</p>
+            <p>Learn more <a href="dist/about.html">about me</a> and what I do.</p>
         </section>
 
         <section>
             <h2>FAQ</h2>
-            <p>Got questions? Check out our <a href="/faq">frequently asked questions</a>.</p>
+            <p>Got questions? Check out our <a href="dist/faq">frequently asked questions</a>.</p>
         </section>
 
         <section>
